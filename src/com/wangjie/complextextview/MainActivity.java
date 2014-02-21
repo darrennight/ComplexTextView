@@ -26,7 +26,7 @@ public class MainActivity extends Activity {
         context = this;
         text = (TextView) findViewById(R.id.text);
 
-        String a = "@haha";
+        String a = "@wangjie";
         NoLineClickSpan span = new NoLineClickSpan(context, a);
 
 //        String html = "hello world use complex text";
@@ -37,8 +37,7 @@ public class MainActivity extends Activity {
 
         sstr.setSpan(span, 0, a.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
 
-
-        Matcher matcher = Pattern.compile("/:exp_....").matcher(sstr.toString());
+        Matcher matcher = Pattern.compile("/:exp_.{4}").matcher(sstr.toString());
         while(matcher.find()){
             String baseName = matcher.group();
             System.out.println("find: " + baseName);
@@ -51,20 +50,9 @@ public class MainActivity extends Activity {
             Drawable d = getResources().getDrawable(res);
             d.setBounds(0, 0, 70, 70);
 
-            sstr.setSpan(new MDrawableSpan(d), matcher.start(), matcher.start() + 10, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+            sstr.setSpan(new MDrawableSpan(d), matcher.start(), matcher.end(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
 
         }
-
-//        sstr.setSpan(new DynamicDrawableSpan(){
-//
-//            @Override
-//            public Drawable getDrawable() {
-//                Drawable d = getResources().getDrawable(R.drawable.ic_launcher);
-////                getResources().getIdentifier(, "id", context.getPackageName());
-//                d.setBounds(0, 0, 70, 70);
-//                return d;
-//            }
-//        }, 30, 40, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
 
         text.setMovementMethod(LinkMovementMethod.getInstance());
         text.setText(sstr);

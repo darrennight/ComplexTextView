@@ -29,7 +29,7 @@ public class NoLineClickSpan extends ClickableSpan{
     public void updateDrawState(TextPaint ds) {
         super.updateDrawState(ds);
         ds.setUnderlineText(false);
-        ds.setColor(Color.parseColor("#003D79"));
+        ds.setColor(Color.parseColor("#0066CC"));
         ds.bgColor = Color.TRANSPARENT;
         this.ds = ds;
 
