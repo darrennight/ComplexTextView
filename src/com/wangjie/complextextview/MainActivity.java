@@ -8,7 +8,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.*;
 import android.text.method.LinkMovementMethod;
+import android.text.style.BackgroundColorSpan;
 import android.text.style.DynamicDrawableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -36,6 +38,7 @@ public class MainActivity extends Activity {
                 "hello wor/:exp_0004ld use co/:exp_0005mplex text");
 
         sstr.setSpan(span, 0, a.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        sstr.setSpan(new BackgroundColorSpan(Color.parseColor("#D1E9E9")), 0, a.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         Matcher matcher = Pattern.compile("/:exp_.{4}").matcher(sstr.toString());
         while(matcher.find()){
@@ -49,10 +52,13 @@ public class MainActivity extends Activity {
             System.out.println("res: " + res);
             Drawable d = getResources().getDrawable(res);
             d.setBounds(0, 0, 70, 70);
+            int start = matcher.start();
+            int end = matcher.end();
 
-            sstr.setSpan(new MDrawableSpan(d), matcher.start(), matcher.end(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-
+            sstr.setSpan(new MDrawableSpan(d), start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+//            sstr.setSpan(new ForegroundColorSpan(Color.parseColor("#0066CC")),start, end,Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         }
+
 
         text.setMovementMethod(LinkMovementMethod.getInstance());
         text.setText(sstr);
